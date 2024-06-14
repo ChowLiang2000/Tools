@@ -1,0 +1,3 @@
+Rename videos from GoPro
+GoPro5产生的视频编号自动分段后比较杂乱
+重命名方便按时间排序
