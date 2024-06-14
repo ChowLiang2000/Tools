@@ -9,8 +9,12 @@ import httpcore
 file_name = 'test.srt'
 
 
-src='en' # source language
-dest='zh-cn' # destination language
+dest ='en' # source language
+src ='zh-cn' # destination language
+
+keep_src = True 
+# keep source language subtitle for True 
+# If False, only show translated subtitle
 
 base_name, ext = os.path.splitext(file_name)
 translated_srt_file_path = f"{base_name}_translated{ext}"  
@@ -61,6 +65,9 @@ for line in tqdm(srt_lines, desc="Translating lines", unit="line"):
         try:
             translated_text = translate_line(line.strip())
             if translated_text != '':
+                # Append original text and translated text
+                if keep_src == True:
+                    translated_srt_lines.append(line.strip() + '\n')
                 translated_srt_lines.append(translated_text + '\n\n')
         except Exception as e:
             print(f"Error translating line: {line.strip()} - {e}")
